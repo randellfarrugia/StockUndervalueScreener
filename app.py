@@ -508,30 +508,40 @@ if run_batch:
 
         # include index in CSV so numbering persists
         csv = outdf.to_csv(index=True).encode("utf-8")
-        st.download_button("Download CSV", data=csv, file_name="scores.csv", mime="text/csv")
+        st.download_button("Download CSV", data=csv, file_name="scores.csv", mime="text/st.markdown("""
+<hr style="margin:2rem 0 0.75rem 0; border:none; border-top:1px solid rgba(128,128,128,.25);" />
+
+
 
 # =========================
-# Footer — GitHub link with icon
+# Footer
 # =========================
-st.markdown("""
-<hr style="margin:2rem 0 0.75rem 0; border:none; border-top:1px solid rgba(128,128,128,.25);" />
+<!-- GitHub link -->
 <div style="display:flex;justify-content:center;align-items:center;gap:.5rem;opacity:.8;">
   <a href="https://github.com/randellfarrugia" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:.4rem;">
     <svg height="18" viewBox="0 0 16 16" width="18" aria-hidden="true" style="vertical-align:middle;">
-      <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-      0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
-      1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
-      0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.68 7.68 0 0 1 2-.27c.68 0 1.36.09
-      2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
-      3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013
-      8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+      <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 
+      7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94
+      -.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+      1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+      -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+      -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.68 7.68 0 0 1 2-.27
+      c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16
+      1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
+      3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+      1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 
+      16 8c0-4.42-3.58-8-8-8z"></path>
     </svg>
     <span>github.com/randellfarrugia</span>
   </a>
-  <br />
-  <span>Disclaimer : No information from this app should be taken as financial advice<span>
+</div>
+
+<!-- Disclaimer -->
+<div style="text-align:center; font-size:0.85rem; opacity:.7; margin-top:0.5rem;">
+  Disclaimer: No information from this app should be taken as financial advice
 </div>
 """, unsafe_allow_html=True)
+
 
 # =========================
 # Bottom-of-page debug (only if DEBUG is ON)
