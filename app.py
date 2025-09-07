@@ -528,6 +528,7 @@ st.markdown("""
     </svg>
     <span>github.com/randellfarrugia</span>
   </a>
+  <br />
   <span>Disclaimer : No information from this app should be taken as financial advice<span>
 </div>
 """, unsafe_allow_html=True)
