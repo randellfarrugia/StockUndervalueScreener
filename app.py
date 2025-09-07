@@ -82,11 +82,24 @@ def debug_log(msg: str):
 # Helpers
 # =========================
 
+import string, random
+
 def make_headers() -> Dict[str, str]:
-    rand = "".join(random.choices(string.ascii_letters + string.digits, k=4))
+    # Random 4-char suffix per request
+    suffix = "".join(random.choices(string.ascii_letters + string.digits, k=4))
+    ua = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+        f" UA-{suffix}"
+    )
     return {
-        "User-Agent": f"Mozilla/5.0 (compatible; StockScreener/1.0; +https://github.com/randellfarrugia) UA-{rand}",
-        "Referer": "https://finviz.com/"
+        "User-Agent": ua,
+        "Referer": "https://finviz.com/",              # keep this; helps reduce 403/429
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
     }
 
 #HEADERS = {"User-Agent": "Mozilla/5.0", "Referer": "https://finviz.com/"}
