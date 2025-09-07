@@ -425,7 +425,7 @@ def render_breakdown(breakdown: List[Dict]):
 # SINGLE TICKER — inline input & button via form
 # =========================
 st.markdown("### Single Ticker")
-st.caption("Enter a symbol and click **Run Score**")
+st.caption("Enter a symbol and click **Check Score**")
 
 with st.form("single_search", clear_on_submit=False):
     c1, c2 = st.columns([8, 2])
@@ -437,7 +437,7 @@ with st.form("single_search", clear_on_submit=False):
             label_visibility="collapsed"
         )
     with c2:
-        submit = st.form_submit_button("Run Score", use_container_width=True)
+        submit = st.form_submit_button("Check Score", use_container_width=True)
 
 # Results directly below the controls
 chart_col, score_col = st.columns([5, 5])
