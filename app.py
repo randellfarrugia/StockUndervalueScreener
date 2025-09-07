@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 from bs4 import BeautifulSoup
 import streamlit.components.v1 as components
+import string
 
 # =========================
 # Page config
@@ -80,7 +81,15 @@ def debug_log(msg: str):
 # =========================
 # Helpers
 # =========================
-HEADERS = {"User-Agent": "Mozilla/5.0", "Referer": "https://finviz.com/"}
+
+def make_headers() -> Dict[str, str]:
+    rand = "".join(random.choices(string.ascii_letters + string.digits, k=4))
+    return {
+        "User-Agent": f"Mozilla/5.0 (compatible; StockScreener/1.0; +https://github.com/randellfarrugia) UA-{rand}",
+        "Referer": "https://finviz.com/"
+    }
+
+#HEADERS = {"User-Agent": "Mozilla/5.0", "Referer": "https://finviz.com/"}
 
 def safe_float(x) -> Optional[float]:
     try:
@@ -152,7 +161,7 @@ def get_statement(symbol: str, s: Optional[str] = None, debug: bool = False) -> 
     while True:
         _throttle()
         try:
-            r = requests.get(BASE, params=params, timeout=12, headers=HEADERS)
+            r = requests.get(BASE, params=params, timeout=12, headers=make_headers())
             if debug:  # collect textual traces; do not write UI here
                 debug_log(f"GET {r.status_code} {r.url}")
             if r.status_code == 429:
@@ -183,7 +192,7 @@ def fetch_snapshot(symbol: str, debug: bool = False) -> dict:
     while True:
         time.sleep(RATE_DELAY if attempt == 0 else (RATE_DELAY + (2 ** attempt) + random.uniform(0, 0.5)))
         try:
-            r = requests.get(SNAPSHOT_URL, params=params, timeout=12, headers=HEADERS)
+            r = requests.get(SNAPSHOT_URL, params=params, timeout=12, headers=make_headers())
             if debug:
                 debug_log(f"GET {r.status_code} {r.url}")
             if r.status_code == 429:
@@ -515,7 +524,8 @@ if run_batch:
 # =========================
 st.markdown("""
 <hr style="margin:2rem 0 0.75rem 0; border:none; border-top:1px solid rgba(128,128,128,.25);" />
-<div style="display:flex;justify-content:center;align-items:center;gap:.5rem;opacity:.8;">
+
+<div style="display:flex;justify-content:center;align-items:center;gap:.5rem;opacity:.8;margin-bottom:0.5rem;">
   <a href="https://github.com/randellfarrugia" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:.4rem;">
     <svg height="18" viewBox="0 0 16 16" width="18" aria-hidden="true" style="vertical-align:middle;">
       <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
@@ -528,9 +538,13 @@ st.markdown("""
     </svg>
     <span>github.com/randellfarrugia</span>
   </a>
-  <span>Disclaimer : No information from this app should be taken as financial advice<span>
+</div>
+
+<div style="text-align:center; font-size:0.85rem; opacity:0.7;">
+  Disclaimer: No information from this app should be taken as financial advice
 </div>
 """, unsafe_allow_html=True)
+
 
 # =========================
 # Bottom-of-page debug (only if DEBUG is ON)
